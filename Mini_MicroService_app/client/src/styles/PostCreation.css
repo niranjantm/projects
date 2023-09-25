@@ -1,0 +1,5 @@
+.main-div{
+    background-color:rgb(167, 208, 244);
+    flex: content;
+    flex-direction: column;
+}
