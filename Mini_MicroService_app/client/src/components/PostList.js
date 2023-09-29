@@ -3,19 +3,19 @@ import axios from "axios"
 import CommentCreate from "./CommentCreate";
 import CommentList from "./CommentList";
 
+
 export default function PostList(){
     const [posts,setPosts] = useState({});
     const fetchPosts = async ()=>{
-        const res = await axios.get("http://localhost:4000/posts")
-        
-        setPosts(res.data)
+        const res = await axios.get("http://localhost:4002/posts");
+        setPosts(res.data);
     }
     
 
     useEffect(()=>{
         fetchPosts();
     },[]);
-
+    console.log("post--->",posts)
     const MyPosts = Object.values(posts).map((post)=>{
         return(
             <div key={post.id} className="min-w-fit min-h-[150px] bg-orange-300 rounded-xl mt-2  mb-2 p-2">

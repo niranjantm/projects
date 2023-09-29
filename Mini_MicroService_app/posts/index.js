@@ -20,11 +20,16 @@ app.post("/posts",async (req,res)=>{ //d
     posts[id] = {id,title};
 
     await axios.post("http://localhost:4005/events",{
-        title:"Post-Created",
+        type:"PostCreated",
         data:{
             id,title
         }
     });
+
+app.post("/events",(req,res)=>{
+    console.log("Recevied Posts Events--->",req.body);
+    res.send({})
+})
 
     res.status(201).send(posts[id]);
 
