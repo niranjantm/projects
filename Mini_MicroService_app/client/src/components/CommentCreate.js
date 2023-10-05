@@ -1,15 +1,17 @@
 import axios from 'axios';
 import React,{useState}from 'react'
 
-function CommentCreate({id}) {
+function CommentCreate({postId}) {
 
     const [comment,setComment] = useState("");
 
+
     const submitHandler = async (event)=>{
         event.preventDefault();
-        await axios.post(`http://localhost:4001/posts/${id}/comments`,{content:comment});
+        await axios.post(`http://localhost:4001/posts/${postId}/comments`,{content:comment});
         setComment("");
     }
+
   return (
     <form onSubmit={submitHandler}>
         <div className='flex flex-col'>

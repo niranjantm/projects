@@ -10,10 +10,9 @@ export default function PostList(){
         const res = await axios.get("http://localhost:4002/posts");
         setPosts(res.data);
     }
-    
-
+   
     useEffect(()=>{
-        fetchPosts();
+        fetchPosts(); 
     },[]);
     console.log("post--->",posts)
     const MyPosts = Object.values(posts).map((post)=>{
@@ -21,8 +20,8 @@ export default function PostList(){
             <div key={post.id} className="min-w-fit min-h-[150px] bg-orange-300 rounded-xl mt-2  mb-2 p-2">
                 <p>{post.title}</p>
                 
-                <CommentList commentId={post.id}></CommentList>
-                <CommentCreate id={post.id}></CommentCreate>
+                <CommentList postComments={post.comments} ></CommentList>
+                <CommentCreate postId={post.id} ></CommentCreate>
             </div>
         )
     })
