@@ -36,7 +36,7 @@ function MainNav() {
               className=" bg-transparent p-2 border border-transparent max-sm:max-w-[75%] focus:outline-none "
             ></input>
             <button type="button" className="max-sm:max-w-[25%]">
-              <FaSearch className="text-stone-600 ml-2 "></FaSearch>
+              <FaSearch className="text-stone-600 ml-2 hover:text-red-500 "></FaSearch>
             </button>
           </form>
           
