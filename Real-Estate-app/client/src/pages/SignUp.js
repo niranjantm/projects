@@ -2,13 +2,15 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {useSelector,useDispatch} from "react-redux";
+import { signInSuccess,signInFailure,signInStart} from "../redux/userReducer";
 
 function SignUp() {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const user = useSelector((state)=>{return state.user});
+
+  const dispatch = useDispatch();
 
   const changeHandler = (event) => {
     setFormData({
@@ -38,7 +40,8 @@ function SignUp() {
     //   setError(null);
     //   setFormData("");
     //   navigate("/sign-in")
-    setLoading(true);
+    
+    dispatch(signInStart())
       event.preventDefault();
      const res = await fetch("/api/auth/sign-up",{
       method:"POST",
@@ -49,14 +52,16 @@ function SignUp() {
      })
      const data = await res.json();
      console.log(data);
+     
      if(data.success===false){
-      setError(data.errorMessage)
-     }else{
-      setError(null);
+      dispatch(signInFailure(data.errorMessage));
+     }
+     
+     else{
+      dispatch(signInFailure(null));
       setFormData("");
       navigate("/sign-in")
      }
-    setLoading(false)
     }
 
    
@@ -93,15 +98,15 @@ function SignUp() {
               className="bg-slate-300 rounded-lg border border-gray-600 focus:outline-none p-2"
             ></input>
           </div>
-          <p className="text-center p-1 text-red-500">{error?error:""}</p>
+          <p hidden={!user.error} className="text-center p-1 text-red-500">{user.error?user.error:""}</p>
           <div className="flex justify-center">
             
             <button
               type="submit"
-              disabled={loading}
-              className="border border-gray-600 p-2 rounded-xl hover:opacity-90 text-white bg-slate-700 mt-3 uppercase disabled:opacity-60"
+              disabled={user.loading}
+              className="border border-gray-600 p-2 rounded-xl hover:opacity-90 text-white bg-blue-500 mt-3 uppercase disabled:opacity-60"
             >
-              {!loading ? "sign up" : "loading..."}
+              {!user.loading ? "sign up" : "loading..."}
             </button>
           </div>
         </form>
