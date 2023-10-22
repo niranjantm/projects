@@ -3,8 +3,11 @@ import { NavLink, Outlet } from "react-router-dom";
 //Using NavLink to change the route and to highlight the current route
 //Using Outlet to accsses the child elements 
 import { FaSearch } from "react-icons/fa";
+import {useSelector} from "react-redux"
 
 function MainNav() {
+
+  const user = useSelector(state=>state.user);
   return (
     <Fragment>
       <header className="p-3  bg-blue-200  ">
@@ -60,12 +63,16 @@ function MainNav() {
               </NavLink>
             </li>
             <li className="  items-center flex hover:underline underline-offset-2 ">
+                {user.currentUser?<NavLink to={"profile"}>
+                  <img src={user.currentUser.photo} alt="profile pic" className="h-10 w-10 rounded-full object-cover"></img>
+                </NavLink>:
               <NavLink
                 to={"sign-in"}
                 className={({ isActive }) => (isActive ? "text-red-500" : "")}
               >
                 Sign-in
               </NavLink>
+                }
             </li>
           </ul>
        
