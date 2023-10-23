@@ -53,6 +53,7 @@ router.post("/sign-in", async (req, res, next) => {
   }
 });
 
+// ----------------------------------------------Google Auth------------------------------------------------------ 
 router.post("/google", async (req, res, next) => {
   try {
     const data = req.body;
