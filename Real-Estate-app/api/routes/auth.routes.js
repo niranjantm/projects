@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-router.use(express.json());
+
 
 //----------------------------------------------------SIGN-UP---------------------------------------------------
 router.post("/sign-up", async (req, res, next) => {
@@ -45,7 +45,7 @@ router.post("/sign-in", async (req, res, next) => {
     const { password: pass, ...rest } = validUser._doc;
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     res
-      .cookie("access_token", token, { httpOnly: true })
+      .cookie("access_token",token, { httpOnly: true })
       .status(200)
       .json(rest);
   } catch (error) {
@@ -80,6 +80,19 @@ router.post("/google", async (req, res, next) => {
         res.cookie("access_token",token,{httpOnly:true}).status(200).json(rest)
     }
   } catch (error) {
+    next(error);
+  }
+});
+// ----------------------------------------------Sign-Out----------------------------------------------------------
+
+router.get("/sign-out",(req,res,next)=>{
+  try{
+
+   
+    res.status(200).clearCookie("access_token").json("User signed-out successfully");
+    
+    
+  }catch(error){
     next(error);
   }
 });

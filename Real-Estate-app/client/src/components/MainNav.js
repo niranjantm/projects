@@ -10,7 +10,7 @@ function MainNav() {
   const user = useSelector(state=>state.user);
   return (
     <Fragment>
-      <header className="p-3  bg-blue-200  ">
+      <header className="p-3  bg-blue-200 shadow-lg  ">
        
         <div className="flex justify-evenly max-w-full gap-5 ">
           
