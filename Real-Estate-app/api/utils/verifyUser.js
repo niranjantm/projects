@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 export default function verifyUser(req,res,next){
     
     const token = req.cookies.access_token;
-    console.log(token);
+    console.log("token = ",token);
     if(!token){
         return next(errorHandler(401,"Unauthorized"));
     }
