@@ -9,7 +9,7 @@ import{
 } from "firebase/storage";
 import { userUpdateStart,userUpdateFailure,userUpdateSuccess,deleteSuccess,deleteFailure } from "../redux/userReducer.js";
 import DeleteModal from "../components/deleteModal";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 function Profile() {
@@ -181,8 +181,8 @@ useEffect(() => {
         <button disabled={user.loading} type="submit" className="border border-gray-600 uppercase rounded-lg bg-blue-600 p-2 hover:opacity-90 text-white">
           {user.loading?"Loading...":"Update"}
         </button>
-        <button type="button" className="border border-gray-600 rounded-lg uppercase bg-blue-600 p-2 hover:opacity-90 text-white">
-          Create listings
+        <button type="button" className="border border-gray-600 rounded-lg uppercase bg-green-600 p-2 hover:opacity-90 text-white">
+          <Link to={"/create-listing"}>Create Listing</Link>
         </button>
       </form>
       <div className="flex justify-between mt-5">

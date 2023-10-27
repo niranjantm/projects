@@ -5,7 +5,7 @@ import Listing from "../models/listing.model.js";
 
 const router = express.Router();
 
-router.post("/create",verifyUser,async (req,res,next)=>{
+router.post("/create",async (req,res,next)=>{
     try{
         // if(req.user.id!==req.params.id){
             // return next(errorHandler(401,"Unauthorised user"));

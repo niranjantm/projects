@@ -8,6 +8,7 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import MainNav from './components/MainNav';
 import PrivateProfile from './components/privateProfile';
+import CreateListing from './pages/CreateListing';
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
     {path:"/sign-in",element:<SignIn></SignIn>},
     {path:"/sign-up",element:<SignUp></SignUp>},
     {element:<PrivateProfile></PrivateProfile>,children:[
-      {path:"/profile",element:<Profile></Profile>}
+      {path:"/profile",element:<Profile></Profile>},
+      {path:"/create-listing",element:<CreateListing></CreateListing>}
     ]},
     ,
     ]},
