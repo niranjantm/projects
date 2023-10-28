@@ -3,55 +3,55 @@ import mongoose from "mongoose";
 const listingSchema = mongoose.Schema({
     name:{
         type:String,
-        require:true
+        requiredd:true
     },
     description:{
         type:String,
-        require:true
+        required:true
     },
     address:{
         type:String,
-        require:true
+        required:true
     },
     regularprice:{
         type:Number,
-        require:true
+        required:true
     },
     discountedprice:{
         type:Number,
-        require:true
+        required:true
     },
     bathrooms:{
         type:Number,
-        require:true
+        required:true
     },
     bedrooms:{
         type:Number,
-        require:true
+        required:true
     },
     furnished:{
         type:Boolean,
-        require:true
+        required:true
     },
     parking:{
         type:Boolean,
-        require:true
+        required:true
     },
     type:{
         type:String,
-        require:true
+        required:true
     },
     offer:{
         type:Boolean,
-        require:true
+        required:true
     },
     imageUrl:{
         type:Array,
-        require:true
+        required:true
     },
     userRef:{
         type:String,
-        require:true
+        required:true
     },
 },{timestamps:true})
 

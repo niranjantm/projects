@@ -6,19 +6,22 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import{useSelector} from "react-redux";
 
 function CreateListing() {
   const [images, setImages] = useState([]);
-  const [formData, setFormData] = useState({ imageUrl: [] });
+  const [formData, setFormData] = useState({furnished:false,parking:false,type:"sell",offer:false, imageUrl: [] });
   const [errorImg, setErrorImg] = useState(false);
-  const [uploading,setUploading] = useState(false);
-  
-  console.log(images);
-  console.log(formData.imageUrl);
-
+  const [uploading, setUploading] = useState(false);
+  const [error,setError] = useState(false);
+  const[loading,setLoading] = useState(false);
+  console.log(formData)
+ 
+  const {currentUser} = useSelector(state=>state.user)
   const handleUploads = () => {
     if (images.length > 0 && images.length + formData.imageUrl.length < 7) {
-      setUploading("Uploading....")
+      setUploading("Uploading....");
+      setErrorImg(false);
       const promises = [];
 
       for (let i = 0; i < images.length; i++) {
@@ -26,11 +29,12 @@ function CreateListing() {
       }
       Promise.all(promises)
         .then((urls) => {
-          console.log(urls);
+          
           setFormData({
             ...formData,
             imageUrl: formData.imageUrl.concat(urls),
           });
+
           setUploading(false);
           setErrorImg(false);
         })
@@ -38,7 +42,11 @@ function CreateListing() {
           setErrorImg("Error while uploading (images must be less than 2 mb)");
         });
     } else {
-      setErrorImg("Number images should be less than 6");
+      if (images.length == 0) {
+        setErrorImg("Select images to upload");
+      } else {
+        setErrorImg("Number images should be less than 6");
+      }
     }
   };
 
@@ -64,17 +72,52 @@ function CreateListing() {
       );
     });
   };
+
+  const handleSubmit= async (e)=>{
+    setLoading(true);
+    setError(false);
+    e.preventDefault();
+    if(+formData.discountedprice > +formData.regularprice){
+      setLoading(false)
+      return setError("Discounted price must be less than Regular price")
+    }
+
+   try{
+    const res = await fetch(`/api/listing/create/${currentUser._id}`,{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        ...formData,userRef:currentUser._id
+      })
+    })
+    const data = await res.json();
+    setLoading(false);
+    if(data.success===false){
+      setError(data.errorMessage);
+    }else{
+      console.log(data);
+    }
+   }catch(error){
+    setError(error.message);
+    setLoading(false);
+   }
+  }
+
+  // -------------------------------------JSX----------------------------------------------------------------//
   return (
     <div className="max-w-5xl mx-auto p-5">
       <p className="text-2xl font-bold text-center my-7">Create a Listing</p>
 
-      <form className="flex flex-col gap-5 sm:flex-row max-sm:gap-3 ">
+      <form className="flex flex-col gap-5 sm:flex-row max-sm:gap-3 "onSubmit={handleSubmit}>
         <div className="flex flex-col flex-1 gap-3">
           <input
             name="name"
             type="text"
             id="name"
             required
+            onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
             placeholder="Name"
             className="bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
           ></input>
@@ -84,6 +127,7 @@ function CreateListing() {
             type="text"
             placeholder="description"
             required
+            onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
             className="bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
           ></textarea>
           <textarea
@@ -91,6 +135,7 @@ function CreateListing() {
             id="address"
             type="text"
             required
+            onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
             placeholder="address"
             className="bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
           ></textarea>
@@ -101,11 +146,12 @@ function CreateListing() {
           <span className='text-lg'>Sell</span>
           </div> */}
             <div className="flex gap-2">
-              <select className="w-20 border border-gray-700 p-1 rounded-md text-lg">
-                <option id="sale" className="text-lg" default>
+              <select className="w-20   text-lg bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
+              onChange={(e)=>{setFormData({...formData,type:e.target.value})}}>
+                <option value="sell"id="sale" defaultValue className="text-lg" default>
                   Sell
                 </option>
-                <option id="rent" className="text-lg">
+                <option value="rent" id="rent" className="text-lg">
                   Rent
                 </option>
               </select>
@@ -114,11 +160,14 @@ function CreateListing() {
           <input type='checkbox' className='w-5' id="rent" name='rent'></input>
           <span className='text-lg'>Rent</span>
           </div> */}
+
             <div className="flex gap-2">
               <input
                 type="checkbox"
                 className="w-5"
                 id="furnished"
+                defaultChecked={false}
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.checked})}}
                 name="furnished"
               ></input>
               <span className="text-lg">Furnished</span>
@@ -128,6 +177,7 @@ function CreateListing() {
                 type="checkbox"
                 className="w-5"
                 id="parking"
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.checked})}}
                 name="parking"
               ></input>
               <span className="text-lg">Parking</span>
@@ -137,6 +187,7 @@ function CreateListing() {
                 type="checkbox"
                 className="w-5"
                 id="offer"
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.checked})}}
                 name="offer"
               ></input>
               <span className="text-lg">Offer</span>
@@ -147,8 +198,9 @@ function CreateListing() {
             <div className="flex gap-2">
               <input
                 type="number"
-                className="w-11 rounded-md p-1"
+                className="w-14 bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
                 id="bedrooms"
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
                 required
                 min="1"
               ></input>
@@ -157,9 +209,10 @@ function CreateListing() {
             <div className="flex gap-2">
               <input
                 type="number"
-                className="w-11 rounded-md p-1"
+                className="w-14 bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
                 id="bathrooms"
                 required
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
                 min="1"
               ></input>
               <span className="text-lg">Baths</span>
@@ -167,24 +220,26 @@ function CreateListing() {
             <div className="flex gap-2">
               <input
                 type="number"
-                className=" rounded-md p-1"
+                className="bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
                 id="regularprice"
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value});setError(false)}}
                 required
               ></input>
               <div>
-                <p className="text-lg">Regular price</p>
-                <span className="text-sm">(Ruppess / month)</span>
+                <p className="text-lg ">Regular price</p>
+                <span className="text-sm" hidden={formData.type=="sell"?true:false}>(Ruppess / month)</span>
               </div>
             </div>
             <div className="flex gap-2">
               <input
                 type="number"
-                className=" rounded-md p-1 "
+                className="bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
                 id="discountedprice"
+                onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
               ></input>
               <div>
                 <p className="text-lg">discounted price</p>
-                <span className="text-sm">(Ruppess / month)</span>
+                <span hidden={formData.type=="sell"?true:false} className="text-sm">(Ruppess / month)</span>
               </div>
             </div>
           </div>
@@ -211,17 +266,22 @@ function CreateListing() {
               disabled={uploading}
               className="border border-green-400 bg-green-400 disabled:opacity-80 text-black shadow-lg hover:opacity-90 rounded-lg p-3"
             >
-              {!uploading?"Upload":uploading}
+              {!uploading ? "Upload" : uploading}
             </button>
-            
           </div>
-{/*---------------------- Using map to display each image stored in formData.imageUrl array ---------------------*/}
+          {/*---------------------- Using map to display each image stored in formData.imageUrl array ---------------------*/}
           <div>
-          <p
+            <p
               hidden={!errorImg}
               className="text-red-600 text-sm text-center p-2"
             >
               {errorImg}
+            </p>
+            <p
+              hidden={!error}
+              className="text-red-600 text-sm text-center p-2"
+            >
+              {error}
             </p>
             {formData.imageUrl.length == 0
               ? ""
@@ -240,14 +300,20 @@ function CreateListing() {
                         className="text-red-600"
                         type="button"
                         onClick={() => {
-          //----------Using filter to delete the specific item in the array------------------------- 
+                          // ---------------------------------Using filter to delete the specific item in the array-------------------------
+
                           setFormData({
                             ...formData,
                             imageUrl: formData.imageUrl.filter((item, id) => {
                               return id !== index;
                             }),
                           });
-                          setErrorImg(false)
+                          setImages(
+                            images.filter((item, id) => {
+                              return id !== index;
+                            })
+                          );
+                          setErrorImg(false);
                         }}
                       >
                         Delete
@@ -256,14 +322,14 @@ function CreateListing() {
                   );
                 })}
           </div>
-        
+
           <div>
-            
             <button
               type="submit"
-              className="uppercase w-full p-3 bg-blue-700 rounded-lg text-white shadow-md hover:opacity-90"
+              disabled={loading || uploading}
+              className="uppercase w-full p-3 bg-blue-700 rounded-lg disabled:opacity-80 text-white shadow-md hover:opacity-90"
             >
-              Create Listing
+              {loading?"Creating....":"Create Listing"}
             </button>
           </div>
         </div>
