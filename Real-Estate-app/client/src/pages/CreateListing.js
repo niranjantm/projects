@@ -7,6 +7,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import{useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function CreateListing() {
   const [images, setImages] = useState([]);
@@ -15,7 +16,8 @@ function CreateListing() {
   const [uploading, setUploading] = useState(false);
   const [error,setError] = useState(false);
   const[loading,setLoading] = useState(false);
-  console.log(formData)
+  const navigate = useNavigate()
+  
  
   const {currentUser} = useSelector(state=>state.user)
   const handleUploads = () => {
@@ -97,7 +99,7 @@ function CreateListing() {
     if(data.success===false){
       setError(data.errorMessage);
     }else{
-      console.log(data);
+      navigate("/profile")
     }
    }catch(error){
     setError(error.message);

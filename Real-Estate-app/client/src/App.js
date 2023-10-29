@@ -9,6 +9,8 @@ import Profile from './pages/Profile';
 import MainNav from './components/MainNav';
 import PrivateProfile from './components/privateProfile';
 import CreateListing from './pages/CreateListing';
+import UpdateListing from './pages/UpdateListing';
+import Listing from './pages/Listing';
 
 
 function App() {
@@ -18,9 +20,11 @@ function App() {
     {path:"/about",element:<About></About>},
     {path:"/sign-in",element:<SignIn></SignIn>},
     {path:"/sign-up",element:<SignUp></SignUp>},
+    {path:"/listing/:listingId",element:<Listing></Listing>},
     {element:<PrivateProfile></PrivateProfile>,children:[
       {path:"/profile",element:<Profile></Profile>},
-      {path:"/create-listing",element:<CreateListing></CreateListing>}
+      {path:"/create-listing",element:<CreateListing></CreateListing>},
+      {path:"/updateListing/:listingId",element:<UpdateListing></UpdateListing>}
     ]},
     ,
     ]},

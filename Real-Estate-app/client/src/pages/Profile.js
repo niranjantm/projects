@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect,} from "react";
+import React, { useRef, useState, useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { app } from "../components/firebase";
 import{
@@ -9,7 +9,8 @@ import{
 } from "firebase/storage";
 import { userUpdateStart,userUpdateFailure,userUpdateSuccess,deleteSuccess,deleteFailure } from "../redux/userReducer.js";
 import DeleteModal from "../components/deleteModal";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,useParams } from "react-router-dom";
+
 
 
 function Profile() {
@@ -21,8 +22,9 @@ function Profile() {
   const [filePercentage, setFilePercentage] = useState(0);
   const [uploadError, setUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-  const[listings,setListings] = useState();
+  const[listings,setListings] = useState("");
   const navigate = useNavigate()
+  const params = useParams();
 
   console.log(filePercentage);
   console.log(formData);
@@ -123,20 +125,25 @@ useEffect(() => {
     }
 
   }
-
+//------------------------------------------------listing Handler-------------------------------------------------
   const listingHandler= async()=>{
     try{
     const res = await fetch(`/api/listing/created/${user.currentUser._id}`,{
       method:"GET"
     })
-    const listings = await res.json();
-    console.log(listings)
-    setListings(listings);
+    const listing = await res.json();
+    console.log("listings--->",...listings)
+    // if(listing.length===0){
+      
+    // }
+    setListings(listing);
+    console.log("listings--->",listing)
     }catch(error){
       dispatch(userUpdateFailure(error.errorMessage))
     }
     
   }
+  //-------------------------------------------------handle Delete Listing-------------------------------------
   const handleDeleteListing= async(item,index)=>{
     const filteredList = listings.filter((item,id)=>{
       return id!==index
@@ -149,6 +156,7 @@ useEffect(() => {
     console.log(data);
 
   }
+
  
   // ----------------------------------------------------------------------------------------------------------------------------------------------
   return (
@@ -220,7 +228,7 @@ useEffect(() => {
       <p hidden={!user.error} className="text-red-700 text-center text-lg">{user.error}</p>
       <p className="text-green-500 text-center cursor-pointer m-2" onClick={listingHandler}>Show listings</p>
       <div>
-        {listings==null?"":listings.map((item,index)=>{
+        {listings===""?<p className="text-center text-lg font-mono">No listings</p>:listings.map((item,index)=>{
           return(
             <div key={index} className="flex justify-between border shadow-lg mt-2 mb-2 p-2 rounded-lg h-[120px] flex-wrap">
             <div className="flex justify-between gap-10 items-center ">
@@ -229,7 +237,8 @@ useEffect(() => {
             </div>
             <div className="flex flex-col p-3 justify-between flex-wrap max-sm:flex-row max-sm:justify-between">
               <p className="text-red-600 uppercase cursor-pointer"onClick={()=>{handleDeleteListing(item,index)}}>Delete</p>
-              <p className="text-blue-600 uppercase cursor-pointer">edit</p>
+              <Link to={`/updateListing/${listings[index]._id}`} onClick={()=>{console.log(listings[index]._id)}} className="text-blue-600 uppercase cursor-pointer">edit</Link>
+              
             </div>
             </div>
           )
