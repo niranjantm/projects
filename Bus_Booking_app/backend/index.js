@@ -12,7 +12,19 @@ mongoose.connect(process.env.mongo).then( async ()=>{
 
 
 const app = express();
-app.use("/",router);
+
+app.use(express.json());
+
+app.use("/api",router);
+app.use((error,req,res,next)=>{
+    const statusCode = error.statusCode || 500;
+    const message = error.message || "Internal server error";
+    res.status(statusCode).json({
+        success : false,
+        message,
+        statusCode
+    })
+})
 
 
 
