@@ -1,5 +1,4 @@
 import express from "express"
-import jwt from "jsonwebtoken";
 import verifyUser from "../utils/verifyUser.js";
 import errorHandler from "../utils/error.js";
 import bcrypt from "bcryptjs"
@@ -7,13 +6,9 @@ import User from "../models/user.model.js";
 
 const router = express.Router();
 
-router.get("/test",((req,res)=>{
-    res.send({
-        Message:'get is working'
-    })
-}));
+// ------------------------------------------------------Update User-------------------------------------
 router.post("/update/:id",verifyUser, async (req,res,next)=>{
-    //Update User;
+    //
     
     if(req.user.id!=req.params.id){
         return next(errorHandler(401,"You are only allowed to update your own account"));
@@ -37,6 +32,7 @@ router.post("/update/:id",verifyUser, async (req,res,next)=>{
         next(error)
     }
 })
+// -------------------------------DELETE-USER--------------------------------------------------------
 router.delete("/delete/:id",verifyUser,async (req,res,next)=>{
     if(req.user.id!=req.params.id){
         return next(errorHandler(401,"Unathorized user"))
@@ -47,6 +43,18 @@ router.delete("/delete/:id",verifyUser,async (req,res,next)=>{
         res.status(200).clearCookie("access_token").json("user deleted successfully");
     }catch(error){
         next(error)
+    }
+})
+//------------------------------------CONTACT-------------------------------------------------------
+router.get("/:id",async(req,res,next)=>{
+    try{
+        console.log("Contact-----> ",req.params.id)
+        const user = await User.findById(req.params.id);
+        console.log(user);
+        const{password,...rest} = user._doc;
+        res.status(200).json(rest);
+    }catch(error){
+        next(error);
     }
 })
 

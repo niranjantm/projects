@@ -76,7 +76,7 @@ router.post("/update/:listingId",async(req,res,next)=>{
     //     return next(errorHandler(401,"Unauthorised user"))
     // }
     try{
-        console.log(req.params.listingId);
+        
         const data = await Listing.findByIdAndUpdate(req.params.listingId,req.body,{ new:true});
         res.status(200).json("Update OK")
     }catch(error){

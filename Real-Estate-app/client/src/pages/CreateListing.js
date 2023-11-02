@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function CreateListing() {
   const [images, setImages] = useState([]);
-  const [formData, setFormData] = useState({furnished:false,parking:false,type:"sell",offer:false, imageUrl: [] });
+  const [formData, setFormData] = useState({furnished:false,parking:false,type:"sale",offer:false, imageUrl: [] });
   const [errorImg, setErrorImg] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error,setError] = useState(false);
@@ -150,7 +150,7 @@ function CreateListing() {
             <div className="flex gap-2">
               <select className="w-20   text-lg bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
               onChange={(e)=>{setFormData({...formData,type:e.target.value})}}>
-                <option value="sell"id="sale" defaultValue className="text-lg" default>
+                <option value="sale"id="sale" defaultValue className="text-lg" default>
                   Sell
                 </option>
                 <option value="rent" id="rent" className="text-lg">

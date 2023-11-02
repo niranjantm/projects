@@ -8,8 +8,9 @@ import{
   getDownloadURL,
 } from "firebase/storage";
 import { userUpdateStart,userUpdateFailure,userUpdateSuccess,deleteSuccess,deleteFailure } from "../redux/userReducer.js";
-import DeleteModal from "../components/deleteModal";
+
 import { Link, useNavigate,useParams } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader"
 
 
 
@@ -22,12 +23,15 @@ function Profile() {
   const [filePercentage, setFilePercentage] = useState(0);
   const [uploadError, setUploadError] = useState(false);
   const [formData, setFormData] = useState({});
-  const[listings,setListings] = useState("");
+  const[listings,setListings] = useState([]);
+  const [error,setError] = useState(false);
+   const [loading,setLoading] = useState(false);
   const navigate = useNavigate()
   const params = useParams();
 
   console.log(filePercentage);
   console.log(formData);
+  console.log("Listings ----->",listings)
 // -----------------------------------------IMAGE UPLOAD FUNCTIONALITY---------------------------------------------
  
 useEffect(() => {
@@ -127,16 +131,22 @@ useEffect(() => {
   }
 //------------------------------------------------listing Handler-------------------------------------------------
   const listingHandler= async()=>{
+    setLoading(true);
+    setError(false)
     try{
     const res = await fetch(`/api/listing/created/${user.currentUser._id}`,{
       method:"GET"
     })
     const listing = await res.json();
-    console.log("listings--->",...listings)
-    // if(listing.length===0){
-      
-    // }
+    console.log("listings--->",...listing)
+    if(listing.length===0 || !listing){
+      setLoading(false);
+      setError(true);
+    }else{
+    setLoading(false);
+    setError(false);
     setListings(listing);
+    }
     console.log("listings--->",listing)
     }catch(error){
       dispatch(userUpdateFailure(error.errorMessage))
@@ -226,20 +236,24 @@ useEffect(() => {
         <span className="text-red-600 cursor-pointer" onClick={signOutHandler}>Sign-out</span>
       </div>
       <p hidden={!user.error} className="text-red-700 text-center text-lg">{user.error}</p>
-      <p className="text-green-500 text-center cursor-pointer m-2" onClick={listingHandler}>Show listings</p>
-      <div>
-        {listings===""?<p className="text-center text-lg font-mono">No listings</p>:listings.map((item,index)=>{
+      <div className="flex justify-center"><p className="text-white text-center cursor-pointer m-2 border border-gray-600 bg-green-600 rounded-lg hover:opacity-80 p-2 w-fit " onClick={listingHandler}>Show listings</p>
+ </div>
+           <div>
+        {loading?<div className='flex justify-center items-center p-4'><BeatLoader color="#1fc600" size={8}></BeatLoader></div>:""}
+        {error?<p className="text-center p-3">No listings... </p>:listings.map((item,index)=>{
           return(
-            <div key={index} className="flex justify-between border shadow-lg mt-2 mb-2 p-2 rounded-lg h-[120px] flex-wrap">
+            <div key={index} className="flex justify-between border shadow-lg mt-2 mb-2 p-2 rounded-lg h-[140px] flex-wrap">
+           
             <div className="flex justify-between gap-10 items-center ">
-            <img src={item.imageUrl[0]} className="w-[150px] max-h-[100px] object-contain rounded-lg"></img>
-            <span>{item.name}</span>
+            <img src={item.imageUrl[0]} className="w-[130px] max-h-[80px] object-contain rounded-lg"></img>
+            <span className="text-lg">{item.name}</span>
             </div>
-            <div className="flex flex-col p-3 justify-between flex-wrap max-sm:flex-row max-sm:justify-between">
+            
+            <div className=" flex flex-col justify-between p-4 max-sm:flex-row gap-5">
               <p className="text-red-600 uppercase cursor-pointer"onClick={()=>{handleDeleteListing(item,index)}}>Delete</p>
               <Link to={`/updateListing/${listings[index]._id}`} onClick={()=>{console.log(listings[index]._id)}} className="text-blue-600 uppercase cursor-pointer">edit</Link>
-              
             </div>
+            
             </div>
           )
         })}

@@ -1,4 +1,4 @@
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
+import{createBrowserRouter,RouterProvider} from "react-router-dom"
 import Header from "./pages/Header";
 import Home from "./pages/Home";
 function App() {
@@ -9,7 +9,7 @@ function App() {
   ])
   return(
     <RouterProvider router={router}>
-      
+
     </RouterProvider>
   )
 }
