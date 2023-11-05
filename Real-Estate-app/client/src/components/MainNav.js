@@ -1,13 +1,35 @@
-import React, { Fragment } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { Fragment, useEffect } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 //Using NavLink to change the route and to highlight the current route
 //Using Outlet to accsses the child elements 
 import { FaSearch } from "react-icons/fa";
 import {useSelector} from "react-redux"
+import { useState } from "react";
 
 function MainNav() {
-
+const [searchTerm,setSearchTerm] = useState("")
   const user = useSelector(state=>state.user);
+  const navigate = useNavigate();
+
+  const handleSubmit=(e)=>{
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("searchTerm",searchTerm);
+    const searchQuery = urlParams.toString()
+    navigate(`/search?${searchQuery}`)
+  }
+
+  
+  useEffect(()=>{
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTermFormUrl = urlParams.get("searchTerm");
+    if(searchTermFormUrl){
+      setSearchTerm(searchTermFormUrl)
+    }
+  },[window.location.search])
+
+
   return (
     <Fragment>
       <header className="p-3  bg-blue-200 shadow-lg  ">
@@ -33,12 +55,14 @@ function MainNav() {
             </span>
           </div>
          
-          <form className="bg-stone-100 rounded-lg flex items-center p-2 max-sm:w-[170px] max-sm:max-h-[50px] ">
+          <form onSubmit={handleSubmit} className="bg-stone-100 rounded-lg flex items-center p-2 max-sm:w-[170px] max-sm:max-h-[50px] ">
             <input
               placeholder="Search..."
-              className=" bg-transparent p-2 border border-transparent max-sm:max-w-[75%] focus:outline-none "
+              value={searchTerm}
+              onChange={e=>setSearchTerm(e.target.value)}
+              className=" bg-transparent p-2 border border-transparent max-sm:max-w-[75%] w-[300px] focus:outline-none "
             ></input>
-            <button type="button" className="max-sm:max-w-[25%]">
+            <button type="submit" className="max-sm:max-w-[25%]">
               <FaSearch className="text-stone-600 ml-2 hover:text-red-500 "></FaSearch>
             </button>
           </form>

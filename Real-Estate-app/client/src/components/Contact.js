@@ -30,8 +30,8 @@ function Contact({listing}) {
     } 
 
   return (
-    <div className='flex flex-col justify-center gap-3'>
-        <div className='flex gap-1'>
+    <div className='flex flex-col justify-center w-[75%] gap-3'>
+        <div className='flex gap-1 '>
         <span className='text-sm'>Contact</span>
         <span className='text-sm font-semibold'>{landlordInfo.username}</span>
         <span className='text-sm'>about</span>
@@ -41,8 +41,10 @@ function Contact({listing}) {
         <textarea className=" rounded-lg bg-slate-300 placeholder-slate-500 border border-gray-800 p-2"placeholder='Enter your message here' rows={3} value={message} onChange={handleMessage}>
 
         </textarea>
-        <Link className='bg-blue-800 rounded-lg p-3 border border-gray-800 text-center text-white hover:opacity-90'to={`mailto:${landlordInfo.email}?subject=Regarding${listing.name}&body=${message}`}>Send Message</Link>
-    </div>
+        <div className='flex justify-center'>
+        <Link className='  bg-blue-800 rounded-lg p-3 border border-gray-800 text-center text-white hover:opacity-90 w-fit'to={`mailto:${landlordInfo.email}?subject=Regarding ${listing.name}&body=${message}`}>Send Message</Link>
+        </div>
+           </div>
     
     
   )

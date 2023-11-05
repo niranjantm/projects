@@ -244,9 +244,9 @@ useEffect(() => {
           return(
             <div key={index} className="flex justify-between border shadow-lg mt-2 mb-2 p-2 rounded-lg h-[140px] flex-wrap">
            
-            <div className="flex justify-between gap-10 items-center ">
-            <img src={item.imageUrl[0]} className="w-[130px] max-h-[80px] object-contain rounded-lg"></img>
-            <span className="text-lg">{item.name}</span>
+            <div className="flex  items-center w-[75%] hover:cursor-pointer" onClick={()=>{navigate(`/listing/${item._id}`)}}>
+            <img src={item.imageUrl[0]} className="w-[130px] max-h-[80px] object-contain rounded-lg mr-2"></img>
+            <span className="text-lg text-center mx-auto truncate">{item.name}</span>
             </div>
             
             <div className=" flex flex-col justify-between p-4 max-sm:flex-row gap-5">

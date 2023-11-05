@@ -11,6 +11,7 @@ import PrivateProfile from './components/privateProfile';
 import CreateListing from './pages/CreateListing';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
+import Search from './pages/Search';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     {path:"/sign-in",element:<SignIn></SignIn>},
     {path:"/sign-up",element:<SignUp></SignUp>},
     {path:"/listing/:listingId",element:<Listing></Listing>},
+    {path:"/search",element:<Search></Search>},
     {element:<PrivateProfile></PrivateProfile>,children:[
       {path:"/profile",element:<Profile></Profile>},
       {path:"/create-listing",element:<CreateListing></CreateListing>},

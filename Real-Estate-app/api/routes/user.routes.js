@@ -46,7 +46,10 @@ router.delete("/delete/:id",verifyUser,async (req,res,next)=>{
     }
 })
 //------------------------------------CONTACT-------------------------------------------------------
-router.get("/:id",async(req,res,next)=>{
+router.get("/:id",verifyUser,async(req,res,next)=>{
+    if(!req.user.id){
+        return next(errorHandler(400,"Sign-in to view contact details"))
+    }
     try{
         console.log("Contact-----> ",req.params.id)
         const user = await User.findById(req.params.id);

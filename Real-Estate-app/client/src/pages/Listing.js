@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,Link } from 'react-router-dom';
 import Carousel from "react-material-ui-carousel"
 import ClipLoader from "react-spinners/ClipLoader"
 import {FaLocationDot as Location} from "react-icons/fa6"
@@ -71,7 +71,7 @@ function Listing() {
                 )})}
             </Carousel>
 
-            <div className='p-5 flex flex-col gap-4'>
+            <div className='p-5 flex flex-col gap-8 max-sm:gap-4'>
                 <div className='flex flex-wrap'>
                     <span className='text-xl font-semibold'>{listing.name} - </span>
                     <span className='text-xl font-semibold'>INR {listing.regularprice}{listing.type==="rent"?" / month":""}</span>
@@ -85,8 +85,8 @@ function Listing() {
                     {listing.offer?<span className='border bg-green-600 text-white rounded-lg text-center w-60 p-1 px-2 '>INR {listing.discountedprice} discount</span>:<span className='border bg-green-600 text-white rounded-lg text-center w-60 p-1 px-2 '>No Offers right now</span>}
                 </div>
                 <div>
-                    <span className='font-semibold'>Description -{" "}</span>
-                    <span className='font-light'>{listing.description}</span>
+                    <span className='font-semibold text-lg max-sm:text-sm'>Description -{" "}</span>
+                    <span className='font-light text-lg max-sm:text-sm'>{listing.description}</span>
                 </div>
                 <div className='flex gap-5 flex-wrap'>
                     <span className='flex gap-2'><Bed className='text-green-600 mt-1.5 max-sm:m-0'></Bed>{listing.bedrooms}{listing.bedrooms>1?" Beds":" Bed"}</span>
@@ -96,7 +96,8 @@ function Listing() {
                 </div>
             </div>
             
-            {currentUser && (currentUser._id!==listing.userRef) && (<div className='flex justify-center mb-5'>
+            {!currentUser?<div className='flex justify-center p-3'><Link to={"/sign-in"} className='text-white border border-gray-800 bg-blue-900 rounded-lg p-3'>Sign-in to contact landlord</Link></div>:(currentUser._id!==listing.userRef) && 
+            (<div className='flex justify-center mb-5'>
             {!contact?<button className='text-white border border-gray-800 bg-blue-900 rounded-lg p-3' onClick={handleContact}>Contact landlord</button>:<Contact listing={listing}></Contact>}
             </div>)}
             </div>)}
