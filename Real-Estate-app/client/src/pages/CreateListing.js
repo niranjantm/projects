@@ -238,9 +238,10 @@ function CreateListing() {
                 className="bg-slate-300 placeholder-slate-500 rounded-lg border border-gray-600 focus:outline-none p-2"
                 id="discountedprice"
                 onChange={(e)=>{setFormData({...formData,[e.target.id]:e.target.value})}}
+                hidden={!formData.offer}
               ></input>
-              <div>
-                <p className="text-lg">discounted price</p>
+              <div hidden={!formData.offer}>
+                <p className="text-lg" >discounted price</p>
                 <span hidden={formData.type=="sell"?true:false} className="text-sm">(Ruppess / month)</span>
               </div>
             </div>

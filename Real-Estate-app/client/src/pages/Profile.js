@@ -242,11 +242,11 @@ useEffect(() => {
         {loading?<div className='flex justify-center items-center p-4'><BeatLoader color="#1fc600" size={8}></BeatLoader></div>:""}
         {error?<p className="text-center p-3">No listings... </p>:listings.map((item,index)=>{
           return(
-            <div key={index} className="flex justify-between border shadow-lg mt-2 mb-2 p-2 rounded-lg h-[140px] flex-wrap">
+            <div key={index} className="flex justify-between border shadow-lg mt-2 mb-2 p-2 rounded-lg h-[140px] flex-wrap hover:scale-105 transition-all">
            
             <div className="flex  items-center w-[75%] hover:cursor-pointer" onClick={()=>{navigate(`/listing/${item._id}`)}}>
             <img src={item.imageUrl[0]} className="w-[130px] max-h-[80px] object-contain rounded-lg mr-2"></img>
-            <span className="text-lg text-center mx-auto truncate">{item.name}</span>
+            <span className="text-lg text-center mx-auto line-clamp-2">{item.name}</span>
             </div>
             
             <div className=" flex flex-col justify-between p-4 max-sm:flex-row gap-5">

@@ -83,24 +83,31 @@ router.post("/update/:listingId", verifyUser, async (req, res, next) => {
 // --------------------------------------------Listing Search------------------------------------------------
 
 router.get("/get", async (req, res, next) => {
+  console.log(req.query)
   try {
     const limit = parseInt(req.query.limit) || 9;
 
     const startIndex = parseInt(req.query.startIndex) || 0;
 
     let offer = req.query.offer;
-    if (offer === undefined || offer === false) {
+    if (offer === undefined || offer === false ||offer === "false" ){
       offer = { $in: [true, false] };
+    }else{
+      offer=true;
     }
 
     let furnished = req.query.furnished;
-    if (furnished === undefined || furnished === false) {
+    if (furnished === undefined || furnished === false ||furnished==="false") {
       furnished = { $in: [true, false] };
+    }else{
+      furnished=true;
     }
 
     let parking = req.query.parking;
-    if (parking === undefined || parking === false) {
+    if (parking === undefined || parking === false || parking==="false") {
       parking = { $in: [true, false] };
+    }else{
+      parking=true;
     }
 
     let type = req.query.type;
@@ -115,19 +122,12 @@ router.get("/get", async (req, res, next) => {
     const order = req.query.order || "desc";
 
     const listings = await Listing.find(
-      {
-        name: { $regex: searchTerm, $options:'i' },
-        address: { $regex: searchTerm, $options:'i' },
-        offer,
-        furnished,
-        type,
-        parking,
-      }).sort({ [sort]: order })
-        .limit(limit)
-        .skip(startIndex)
-    
-
-    return res.status(200).json(listings)
+      {name: { $regex:searchTerm, $options:'i' },
+        offer:offer,
+        furnished:furnished,
+        type:type,
+        parking:parking}).sort({ [sort]: order }).limit(limit).skip(startIndex)
+   res.status(200).json(listings)
   } catch (error) {
     next(error);
   }
