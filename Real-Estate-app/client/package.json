@@ -51,5 +51,5 @@
   "devDependencies": {
     "tailwindcss": "^3.3.3"
   },
-  "proxy": "https://backend-4oem.onrender.com"
+  "proxy":"https://backend-4oem.onrender.com"
 }
