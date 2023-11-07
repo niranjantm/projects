@@ -17,13 +17,16 @@ mongoose
     console.log(err);
   });
 
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(express.static('build'))
 app.use("/api/users", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/listing", listingRouter);
+
 
 
 app.use((error, req, res, next) => {
