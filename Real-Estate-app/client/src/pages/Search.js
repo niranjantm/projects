@@ -306,7 +306,7 @@ function Search() {
                         </p>
                       </div>
 
-                      <div className="flex p-2">
+                      <div className="flex p-2 flex-wrap justify-center">
                         <p className="text-lg text-gray-800">
                           {item.offer
                             ? `At discounted price of INR ${item.discountedprice} `

@@ -71,7 +71,7 @@ function Listing() {
                 )})}
             </Carousel>
 
-            <div className='p-5 flex flex-col gap-8 max-sm:gap-4'>
+            <div className='p-5 flex flex-col gap-8 max-sm:gap-4 '>
                 <div className='flex flex-wrap'>
                     <span className='text-xl font-semibold'>{listing.name} - </span>
                     <span className='text-xl font-semibold'>INR {listing.regularprice}{listing.type==="rent"?" / month":""}</span>
@@ -81,16 +81,16 @@ function Listing() {
                     <span className="text-lg max-sm:text-sm">{listing.address}</span>
                 </div>
                 <div className='flex gap-4 flex-wrap max-sm:flex-col max-sm:items-center'>
-                    <span className='border bg-red-700 text-white rounded-lg text-center w-60 p-1 uppercase my-auto'>{listing.type}</span>
-                    {listing.offer?<span className='border bg-green-600 text-white rounded-lg text-center w-60 p-1 px-2 '>INR {listing.discountedprice} discount</span>:<span className='border bg-green-600 text-white rounded-lg text-center w-60 p-1 px-2 '>No Offers right now</span>}
+                    <span className=' bg-red-900 text-white rounded-lg text-center w-60 p-1 uppercase my-auto'>{"For "}{listing.type}</span>
+                    {listing.offer?<span className=' bg-green-800 text-white rounded-lg text-center w-60 p-1 px-2 '>INR {listing.discountedprice} discount</span>:<span className='border bg-green-800 text-white rounded-lg text-center w-60 p-1 px-2 '>No Offers right now</span>}
                 </div>
                 <div>
                     <span className='font-semibold text-lg max-sm:text-sm'>Description -{" "}</span>
                     <span className='font-light text-lg max-sm:text-sm'>{listing.description}</span>
                 </div>
-                <div className='flex gap-5 flex-wrap'>
-                    <span className='flex gap-2'><Bed className='text-green-600 mt-1.5 max-sm:m-0'></Bed>{listing.bedrooms}{listing.bedrooms>1?" Beds":" Bed"}</span>
-                    <span className='flex gap-2'><Bath className='text-green-600 mt-1.5 max-sm:m-0'></Bath>{listing.bathrooms}{listing.bathrooms>1?" Baths":" Bath"}</span>
+                <div className='flex gap-5 flex-wrap justify-center'>
+                    <span className='flex gap-2'><Bed className='text-green-600 mt-1.5 max-sm:m-0'></Bed>{listing.bedrooms}{listing.bedrooms>1?" Bedrooms":" Bedroom"}</span>
+                    <span className='flex gap-2'><Bath className='text-green-600 mt-1.5 max-sm:m-0'></Bath>{listing.bathrooms}{listing.bathrooms>1?" Bathrooms":" Bathroom"}</span>
                     <span className='flex gap-2'><Parking className={listing.parking?'text-green-600 mt-1.5 max-sm:m-0':'text-red-600 mt-1.5 max-sm:m-0'}></Parking>{listing.parking?"Parking spot":"No Parking"}</span>
                     <span className='flex gap-2'><Furnished className={listing.furnished?'text-green-600 mt-1.5 max-sm:m-0':'text-red-600 mt-1.5 max-sm:m-0'}></Furnished>{listing.furnished?"Furnished":"Not Furnished"}</span>
                 </div>

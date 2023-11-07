@@ -24,7 +24,7 @@ function Home() {
         const urlParams = new URLSearchParams();
         const sort = "createdAt";
         const order = "desc";
-        const limit = 5;
+        const limit = 6;
         urlParams.set("sort", sort);
         urlParams.set("order", order);
         urlParams.set("limit", limit);
@@ -45,7 +45,7 @@ function Home() {
       const fetchOffers = async () => {
         const urlParams = new URLSearchParams();
         const offer = true;
-        const limit = 5;
+        const limit = 6;
         const sort = "createdAt";
         const order = "desc";
         urlParams.set("offer", offer);
@@ -70,7 +70,7 @@ function Home() {
       const fetchRent = async () => {
         const urlParams = new URLSearchParams();
         const type = "rent";
-        const limit = 5;
+        const limit = 6;
         const sort = "createdAt";
         const order = "desc";
         urlParams.set("type", type);
@@ -95,7 +95,7 @@ function Home() {
       const fetchSale = async () => {
         const urlParams = new URLSearchParams();
         const type = "sale";
-        const limit = 5;
+        const limit = 6;
         const sort = "createdAt";
         const order = "desc";
         urlParams.set("type", type);

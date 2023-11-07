@@ -32,9 +32,9 @@ const [searchTerm,setSearchTerm] = useState("")
 
   return (
     <Fragment>
-      <header className="p-3  bg-blue-200 shadow-lg  ">
+      <header className="p-6  bg-gradient-to-r from-cyan-300 to-blue-300 shadow-lg sm:p-3  ">
        
-        <div className="flex justify-evenly max-w-full gap-5 ">
+        <div className="flex justify-evenly max-w-full gap-2 sm:gap-5 ">
           
           <div className="flex items-center">
             <span>
