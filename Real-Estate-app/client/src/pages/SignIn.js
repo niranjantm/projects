@@ -49,8 +49,8 @@ function SignIn() {
   
 
   return (
-    <div className="p-10">
-      <p className="text-3xl font-semibold text-center">Sign In</p>
+    <div className="">
+      <p className="text-3xl font-semibold text-center p-8">Sign In</p>
       <div className="p-5">
         <form  onSubmit={submitHandler} className="bg-slate-200 gap-5 max-w-lg max-sm:w-[300px] p-5 rounded-lg shadow-lg mx-auto flex flex-col justify-center ">
           <input
