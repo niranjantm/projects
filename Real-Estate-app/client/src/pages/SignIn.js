@@ -51,7 +51,7 @@ function SignIn() {
   return (
     <div className="">
       <p className="text-3xl font-semibold text-center p-8">Sign In</p>
-      <div className="p-5 mx-auto flex justify-center">
+      <div className="p-5 mx-auto flex justify-center w-full">
         <form  onSubmit={submitHandler} className="bg-slate-200 gap-5 max-w-lg max-sm:w-[300px] p-5 rounded-lg shadow-lg  flex flex-col justify-center ">
           <input
             id="email"
