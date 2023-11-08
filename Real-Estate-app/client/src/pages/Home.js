@@ -180,7 +180,7 @@ function Home() {
               {recentListinigs.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
+                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
@@ -234,7 +234,7 @@ function Home() {
               {offerListings.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
+                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
@@ -289,7 +289,7 @@ function Home() {
               {rentListings.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
+                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
@@ -345,7 +345,7 @@ function Home() {
               {saleListings.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
+                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
