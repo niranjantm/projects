@@ -176,11 +176,11 @@ function Home() {
             >
               Show more...
             </p>
-            <div className="flex gap-6 border flex-wrap p-3">
+            <div className="flex gap-6 border-t flex-wrap p-3">
               {recentListinigs.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
+                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
@@ -230,11 +230,11 @@ function Home() {
             >
               Show more...
             </p>
-            <div className="flex gap-6 border flex-wrap p-3">
+            <div className="flex gap-6 border-t flex-wrap p-3">
               {offerListings.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
+                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all"
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
@@ -285,11 +285,11 @@ function Home() {
             >
               Show more...
             </p>
-            <div className="flex gap-6 border flex-wrap p-3">
+            <div className="flex gap-6 border-t flex-wrap p-3">
               {rentListings.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
+                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
@@ -341,11 +341,11 @@ function Home() {
             >
               Show more...
             </p>
-            <div className="flex gap-6 border flex-wrap p-3">
+            <div className="flex gap-6 border-t flex-wrap p-3">
               {saleListings.map((item, index) => {
                 return (
                   <div
-                    className="w-[350px] h-fit border-t border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
+                    className="w-[350px] h-fit border border-gray-300 rounded-lg shadow-lg mx-auto pb-4 hover:scale-95 transition-all "
                     onClick={() => {
                       navigate(`/listing/${item._id}`);
                     }}
