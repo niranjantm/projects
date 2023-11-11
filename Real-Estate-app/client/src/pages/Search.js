@@ -153,7 +153,7 @@ function Search() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
+    <div className="flex flex-col md:flex-row ">
       {/* ------------------------------CONDITIONS------------------------------ */}
       
       <form
