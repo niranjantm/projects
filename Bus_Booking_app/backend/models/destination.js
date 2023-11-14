@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-var thingSchema = new mongoose.Schema({}, { strict: false });
+var desSchema = new mongoose.Schema({}, { strict: false });
 
-const destination= mongoose.model("state_district",thingSchema);
+const destination= mongoose.model("state_district",desSchema);
 
 export default destination;

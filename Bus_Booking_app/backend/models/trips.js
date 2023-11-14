@@ -19,7 +19,7 @@ function randomBusOwnerId() {
 const tripSchema = new mongoose.Schema(
   {
     date: {
-      type: Number,
+      type: Date,
       required: true,
     },
     from: {
