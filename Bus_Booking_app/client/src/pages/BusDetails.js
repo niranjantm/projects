@@ -53,7 +53,7 @@ function BusDetails() {
           <p className="text-sm font-semibold">{item.from}</p>
           </div>
           
-          <div className="flex ">
+          <div className="flex justify-between ">
           
           <div className=" w-fit flex flex-col flex-wrap gap-3 max-md:gap-1 p-2">
             <p className="text-lg font-semibold text-center max-md:text-sm">{item.busName}</p>
