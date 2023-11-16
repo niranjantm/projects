@@ -1,7 +1,15 @@
 import busOwners from "../models/busOwners.js";
 import Trips from "../models/trips.js";
+import moment from "moment"
 
 const AvailableTrips = async (req, res, next) => {
+  
+  let tripsData = await Trips.find({date:req.body.date,from:req.body.from,to:req.body.to})
+  if(tripsData.length>0){
+    console.log("tripsData--->",tripsData)
+    return res.status(200).json(tripsData)
+  }
+  else{
   let trips = [];
 
   try {
@@ -23,7 +31,7 @@ const AvailableTrips = async (req, res, next) => {
       let index = Math.floor(arr.length * num);
       return arr[index];
     }
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       const busOwnerId = randomBusOwnerId();
       const bus = await busOwners.findById(busOwnerId);
       const trip = await Trips.create({
@@ -32,7 +40,7 @@ const AvailableTrips = async (req, res, next) => {
         to: req.body.to,
         busOwnerId: busOwnerId,
         startTime:6+3*i,
-        endTime:10+3*i,
+        endTime:9+3*i,
         category:bus.category,
         SeatBooked:[],
         animeties:bus.animeties,
@@ -42,11 +50,13 @@ const AvailableTrips = async (req, res, next) => {
         totalSeats:bus.totalSeats
       });
       trips.push(trip)
+      console.log("trips--->",trips)
     }
-    return res.status(200).json(trips);
+    res.status(200).json(trips);
   } catch (error) {
     next(error);
   }
+}
 };
 
 export default AvailableTrips;

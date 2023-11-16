@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import trips from "./models/trips.js";
-import router from "./routes/TripRoutes.js";
+import router from "./routes/Routes.js";
 import busOwners from "./models/busOwners.js";
 import cors from "cors";
 

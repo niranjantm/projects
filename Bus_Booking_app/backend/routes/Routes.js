@@ -1,6 +1,7 @@
 import express from "express";
 import AvailableTrips from "../controller/AvailableTrips.js";
-import locations from "../controller/GetLocations.js";
+import Triplocations from "../controller/GetLocations.js";
+import Buses from "../controller/Buses.js"
 
 
 const router  = express.Router();
@@ -8,6 +9,8 @@ const router  = express.Router();
 
 router.post("/trips",AvailableTrips)
 
-router.get("/locations/get",locations)
+router.get("/locations/get",Triplocations)
+
+router.get("/availableBuses/get",Buses)
 
 export default router;

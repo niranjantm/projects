@@ -1,31 +1,33 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import url from "../utils/BackendUrl";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [formData, setFormData] = useState({});
   const [locations, setLocations] = useState([]);
-  const [error,setError] = useState(false);
-  console.log(formData)
-  
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  console.log(formData);
+  console.log(error);
+
   useEffect(() => {
     const fetchDes = async () => {
-      const res = await axios.get(
-        `${url}/api/locations/get`
-      );
+      const res = await axios.get(`${url}/api/locations/get`);
       // const data = await res.data.json();
       setLocations(res.data);
     };
     fetchDes();
   }, []);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`${url}/api/trips`,{
-      from:`${formData.fromDistrict}, ${formData.fromState}`,
-      to:`${formData.toDistrict}, ${formData.toState}`,
-      date:formData.date
-    })
+    const res = await axios.post(`${url}/api/trips`, {
+      from: `${formData.fromDistrict}, ${formData.fromState}`,
+      to: `${formData.toDistrict}, ${formData.toState}`,
+      date: `${formData.date}`,
+    });
+    navigate(`/busDetails/${formData.date}/${formData.fromDistrict}, ${formData.fromState}/${formData.toDistrict}, ${formData.toState}`)
   };
   return (
     <div className="">
@@ -50,64 +52,63 @@ function Home() {
                 <p className="text-lg text-black p-2 ">From</p>
 
                 <div className="flex flex-col gap-5 m-3">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-sm ">Select State</p>
-                  <select
-                    className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
-                    id="fromState"
-                    
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        [e.target.id]: e.target.value,
-                      });
-                      
-                    }}
-                  >
-                    
-                    {locations.length <= 0
-                      ? ""
-                      : locations.map((item, index) => {
-                          return (
-                            <option key={index} value={item.state}>
-                              {item.state}
-                            </option>
-                          );
-                        })}
-                  </select>
-                  </div>
                   
-                        <div className="flex flex-col gap-2">
-                          <p className="text-sm">Select Districts</p>
-                        <select
-                    id="fromDistrict"
-                    className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
-                    placeholder="Districts"
-                    disabled={
-                      !formData.fromState
-                    }
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        [e.target.id]: e.target.value,
-                      });
+                    <select
+                      className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
+                      id="fromState"
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          [e.target.id]: e.target.value,
+                        });
+                      }}
+                    >
                       
-                    }}
-                  > 
-                    {!formData.fromState || formData.fromState ==="Select state"?"":
-                      locations.filter((item,index)=>{
-                        if(item.state === formData.fromState){
-                          return item
-                        }
-                      })[0].districts.map((item,index)=>{
-                        return(
-                          <option value={item} key={index}>{item}</option>
-                        )
-                      })
-                    }
-                   
-                  </select>
-                        </div>
+                      <option hidden={formData.fromState}>Select State</option>
+                      {locations.length <= 0
+                        ? ""
+                        : locations.map((item, index) => {
+                            return (
+                              <option key={index} value={item.state}>
+                                {item.state}
+                              </option>
+                            );
+                          })}
+                    </select>
+                  
+
+                  
+                    
+                    <select
+                      id="fromDistrict"
+                      className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
+                      placeholder="Districts"
+                      disabled={!formData.fromState}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          [e.target.id]: e.target.value,
+                        });
+                      }}
+                    >
+                      <option hidden={formData.fromDistrict}>Select District</option>
+                      {!formData.fromState ||
+                      formData.fromState === "Select state"
+                        ? ""
+                        : locations
+                            .filter((item, index) => {
+                              if (item.state === formData.fromState) {
+                                return item;
+                              }
+                            })[0]
+                            .districts.map((item, index) => {
+                              return (
+                                <option value={item} key={index}>
+                                  {item}
+                                </option>
+                              );
+                            })}
+                    </select>
                   
                 </div>
               </div>
@@ -116,61 +117,57 @@ function Home() {
                 <p className="text-lg text-black p-2 ">To</p>
 
                 <div className="flex flex-col gap-5 m-3">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-sm">Select State</p>
-                  <select
-                    className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
-                    id="toState"
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        [e.target.id]: e.target.value,
-                      });
-                      
-                    }}
-                  >
-                    
-                    {locations.length <= 0
-                      ? ""
-                      : locations.map((item, index) => {
-                          return (
-                            <option key={index} value={item.state}>
-                              {item.state}
-                            </option>
-                          );
-                        })}
-                  </select>
-                  </div>
                   
-                <div className="flex flex-col gap-2">
-                  <p className="text-sm">Select District</p>
-                <select
-                    id="toDistrict"
-                    className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
-                    disabled={
-                      !formData.toState 
-                    }
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        [e.target.id]: e.target.value,
-                      });
-                      
-                    }}
-                  >
+                    <select
+                      className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
+                      id="toState"
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          [e.target.id]: e.target.value,
+                        });
+                      }}
+                    >
+                      <option hidden={formData.toState}>Select State</option>
+                      {locations.length <= 0
+                        ? ""
+                        : locations.map((item, index) => {
+                            return (
+                              <option key={index} value={item.state}>
+                                {item.state}
+                              </option>
+                            );
+                          })}
+                    </select>
+                  
+
+                  
                     
-                    {formData.toState!==undefined &&
-                      locations.filter((item,index)=>{
-                        return item.state === formData.toState
-                      })[0].districts.map((item,index)=>{
-                        return(
-                          <option value={item} key={index}>{item}</option>
-                        )
-                      })
-                    }
-                   
-                  </select>
-                </div>
+                    <select
+                      id="toDistrict"
+                      className="w-[150px] max-md:w-28 p-2 rounded-lg border shadow-md"
+                      disabled={!formData.toState}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          [e.target.id]: e.target.value,
+                        });
+                      }}
+                    >
+                      <option hidden={formData.toDistrict}>Select District</option>
+                      {formData.toState !== undefined &&
+                        locations
+                          .filter((item, index) => {
+                            return item.state === formData.toState;
+                          })[0]
+                          .districts.map((item, index) => {
+                            return (
+                              <option value={item} key={index}>
+                                {item}
+                              </option>
+                            );
+                          })}
+                    </select>
                   
                 </div>
               </div>
@@ -178,24 +175,58 @@ function Home() {
               <div className="">
                 <p className="text-lg  text-black max-md:text-center ">Date</p>
                 <div className="h-full mt-8 max-md:mt-2">
-                <input
-                  type="date"
-                  id="date"
-                  required
-                  className="bg-transparent my-auto text-sm border-gray-500 outline-none w-40 h-[80px]   max-md:w-28 p-2 max-md:p-0 border rounded-lg shadow-md"
-                  onChange={(e) => {
-                    setFormData({ ...formData, [e.target.id]: e.target.value });
-                  }}
-                ></input>
+                  <input
+                    type="date"
+                    id="date"
+                    defaultValue={"2023-10-03"}
+                    required
+                    className="bg-transparent my-auto text-sm border-gray-500 outline-none w-40 h-[80px]   max-md:w-28 p-2 max-md:p-0 border rounded-lg shadow-md"
+                    onChange={(e) => {
+                      
+                      let currentDate = new Date();
+                      let f = new Intl.DateTimeFormat("en-us", {
+                        dateStyle: "short",
+                      });
+
+                      let date = new Date(e.target.value);
+
+                      if (Date.parse(date) < Date.parse(currentDate)) {
+                        if (f.format(date) === f.format(currentDate)) {
+                          setError(false);
+                          setFormData({
+                            ...formData,
+                            [e.target.id]: e.target.value,
+                          });
+                        } else {
+                          setError(true);
+                        }
+                      } else {
+                        setError(false);
+                        setFormData({
+                          ...formData,
+                          [e.target.id]: e.target.value,
+                        });
+                      }
+                    }}
+                  ></input>
+                  <p hidden={!error} className="text-red-500 text-center">
+                    Please provide valid date...!
+                  </p>
                 </div>
-                
               </div>
             </div>
 
             <div className="mx-auto md:mt-4">
               <button
                 type="submit"
-                disabled={!formData.fromState || !formData.toState || !formData.toDistrict || !formData.fromDistrict || !formData.date}
+                disabled={
+                  !formData.fromState ||
+                  !formData.toState ||
+                  !formData.toDistrict ||
+                  !formData.fromDistrict ||
+                  !formData.date ||
+                  error
+                }
                 className="uppercase rounded-xl border text-center text-lg text-white w-40 h-[80px] p-2 hover:shadow-lg bg-red-600 disabled:opacity-70 "
               >
                 Search buses
