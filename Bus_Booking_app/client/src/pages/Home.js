@@ -22,13 +22,9 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`${url}/api/trips`, {
-      from: `${formData.fromDistrict}, ${formData.fromState}`,
-      to: `${formData.toDistrict}, ${formData.toState}`,
-      date: `${formData.date}`,
-    });
     navigate(`/busDetails/${formData.date}/${formData.fromDistrict}, ${formData.fromState}/${formData.toDistrict}, ${formData.toState}`)
-  };
+
+      };
   return (
     <div className="">
       {/* ----------------------------From TO Date------------------------------------------- */}
