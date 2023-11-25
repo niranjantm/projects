@@ -4,8 +4,8 @@ import { motion} from "framer-motion"
 function Home() {
   
   return (
-    <div name="intro" className="h-screen bg-gradient-to-b from-[#7366e6] to-gray-500 flex justify-center">
-      <motion.div className="max-w-screen-xl  max-auto flex flex-col items-center justify-center h-full px-4 md:flex-row">
+    <div name="intro" className="h-screen flex justify-center border-none bg-gradient-to-b from-[#7366e6] via-gray-500 to-[#7366e6] max-md:mt-[70px] p-2">
+      <motion.div className="max-w-screen-lg  max-auto flex flex-col items-center justify-center h-full px-4 md:flex-row ">
         
         <div className=" text-white flex flex-col justify-center h-full ">
           <h2 className="text-4xl sm:text-7xl font-bold">I'm a Full Stack Developer</h2>

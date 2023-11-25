@@ -12,7 +12,7 @@ function Navbar() {
     {id:2,
     link:"about"},
     {id:3,
-    link:"projects"},
+    link:"portfolio"},
     {id:4,
     link:"experience"},
     {id:5,
@@ -20,7 +20,7 @@ function Navbar() {
   ]
 
   return (
-    <div className='flex justify-between items-center px-2 h-20 fixed text-white bg-[#423a8c] w-full'>
+    <div className='flex justify-between items-center px-2 h-20 fixed text-white bg-[#423a8c] w-full top-0 z-10'>
        <div>
         <p className='font-Rock text-5xl mx-2 uppercase max-md:text-3xl'> Niranjan</p>
        </div>
