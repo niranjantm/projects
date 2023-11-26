@@ -18,7 +18,7 @@ function Header() {
             </div>
             
             <div className='flex gap-1 hover:cursor-pointer' onClick={()=>{navigate("/account")}}>
-            <VscAccount className='mt-1'></VscAccount>
+            <VscAccount className=''size={30}></VscAccount>
             <p>My Account</p>
             </div>
             

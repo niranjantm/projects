@@ -2,9 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import trips from "./models/trips.js";
-import router from "./routes/Routes.js";
+import tripRouter from "./routes/TripRoutes.js";
+import userRouter from "./routes/UserRouter.js"
 import busOwners from "./models/busOwners.js";
 import cors from "cors";
+
 
 dotenv.config();
 
@@ -16,9 +18,12 @@ mongoose.connect(process.env.mongo).then( async ()=>{
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({origin:"http://localhost:3000",credentials:true}))
 
-app.use("/api",router);
+
+
+app.use("/api",tripRouter);
+app.use("/api/user",userRouter);
 
 
 app.use((error,req,res,next)=>{

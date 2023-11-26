@@ -6,10 +6,11 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const [formData, setFormData] = useState({});
   const [locations, setLocations] = useState([]);
-  const [error, setError] = useState(false);
+  const [dateError, setDateError] = useState(false);
+  const [destinationError,setDestinationError] = useState(false);
   const navigate = useNavigate();
   console.log(formData);
-  console.log(error);
+  
 
   useEffect(() => {
     const fetchDes = async () => {
@@ -22,8 +23,14 @@ function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate(`/busDetails/${formData.date}/${formData.fromDistrict}, ${formData.fromState}/${formData.toDistrict}, ${formData.toState}`)
-
+    if(formData.fromDistrict===formData.toDistrict){
+      setDestinationError(true)
+    }
+    else{
+      setDestinationError(false)
+      navigate(`/busDetails/${formData.date}/${formData.fromDistrict}, ${formData.fromState}/${formData.toDistrict}, ${formData.toState}`)
+    }
+    
       };
   return (
     <div className="">
@@ -166,8 +173,9 @@ function Home() {
                     </select>
                   
                 </div>
+                {destinationError && <p className="text-red-500 text-center">Please select valid destinations</p>}
               </div>
-
+              
               <div className="">
                 <p className="text-lg  text-black max-md:text-center ">Date</p>
                 <div className="h-full mt-8 max-md:mt-2">
@@ -188,16 +196,16 @@ function Home() {
 
                       if (Date.parse(date) < Date.parse(currentDate)) {
                         if (f.format(date) === f.format(currentDate)) {
-                          setError(false);
+                          setDateError(false);
                           setFormData({
                             ...formData,
                             [e.target.id]: e.target.value,
                           });
                         } else {
-                          setError(true);
+                          setDateError(true);
                         }
                       } else {
-                        setError(false);
+                        setDateError(false);
                         setFormData({
                           ...formData,
                           [e.target.id]: e.target.value,
@@ -205,7 +213,7 @@ function Home() {
                       }
                     }}
                   ></input>
-                  <p hidden={!error} className="text-red-500 text-center">
+                  <p hidden={!dateError} className="text-red-500 text-center">
                     Please provide valid date...!
                   </p>
                 </div>
@@ -221,7 +229,8 @@ function Home() {
                   !formData.toDistrict ||
                   !formData.fromDistrict ||
                   !formData.date ||
-                  error
+                  dateError ||
+                  destinationError
                 }
                 className="uppercase rounded-xl border text-center text-lg text-white w-40 h-[80px] p-2 hover:shadow-lg bg-red-600 disabled:opacity-70 "
               >

@@ -1,17 +1,26 @@
 import{createBrowserRouter,RouterProvider} from "react-router-dom"
 import Header from "./pages/Header";
 import Home from "./pages/Home";
-import Account from "./pages/Account";
+import UserSignIn from "./pages/UserSignIn";
 import BusDetails from "./pages/BusDetails";
 import Booking from "./pages/Booking";
+import UserSignUp from "./pages/UserSignUp";
+import PrivatePages from "./utils/PrivatePages";
+import Account from "./pages/Account";
 
 function App() {
   const router = createBrowserRouter([
     {path:"/",element:<Header></Header>,children:[
       {index:true,element:<Home></Home>},
-      {path:"/account",element:<Account></Account>},
+      {path:"/signIn",element:<UserSignIn></UserSignIn>},
+      {path:"/signUp",element:<UserSignUp></UserSignUp>},
       {path:"/busDetails/:date/:from/:to",element:<BusDetails></BusDetails>},
-      {path:"/booking/:id",element:<Booking></Booking>}
+      {element:<PrivatePages></PrivatePages>,children:[
+        {path:"/booking/:id",element:<Booking></Booking>},
+        {path:'/account',element:<Account></Account>}
+
+      ]}
+      
     ]}
   ])
   return(

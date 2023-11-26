@@ -45,7 +45,7 @@ router.post("/sign-in", async (req, res, next) => {
     const { password: pass, ...rest } = validUser._doc;
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     res
-      .cookie("access_token",token, { httpOnly: true })
+      .cookie("access_token",token)
       .status(200)
       .json(rest);
   } catch (error) {

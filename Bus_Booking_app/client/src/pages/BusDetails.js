@@ -4,12 +4,14 @@ import url from "../utils/BackendUrl";
 import { useParams } from "react-router-dom";
 import {BallTriangle} from "react-loader-spinner"
 import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux"
 
 
 function BusDetails() {
   const params = useParams();
   const [buses,setBuses] = useState([]);
   const [loading,setLoading] = useState(false);
+  const user = useSelector(state=>state.user);
   
   const navigate = useNavigate()
   
@@ -37,7 +39,7 @@ function BusDetails() {
 
   const handleBooking=(id)=>{
 
-    navigate(`/booking/${id}`)
+      navigate(`/booking/${id}`)
 
   }
 
