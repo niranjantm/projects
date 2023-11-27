@@ -4,6 +4,7 @@ import { motion} from "framer-motion"
 import {FaGithub,FaLinkedin} from "react-icons/fa";
 import {HiOutlineMail} from "react-icons/hi";
 import {BsFillPersonLinesFill} from "react-icons/bs";
+import {Link} from "react-scroll"
 
 
 
@@ -61,10 +62,10 @@ function Home() {
           
           <div className="flex gap-4">
             <motion.button  whileTap={{y:20}} className="flex group rounded-lg bg-gradient-to-r from-red-500 via-red-600 to-red-700 w-fit p-2 hover:scale-105 transition-all items-center gap-2">
-              Portfolio
-              <span className="group-hover:rotate-90 duration-300">
+              <Link className="flex items-center gap-2" to={"portfolio"} duration={400} smooth={true} >Portfolio <span className="group-hover:rotate-90 duration-300">
               <FaArrowRight size={18}></FaArrowRight>
-              </span>
+              </span></Link>
+              
               
             </motion.button>
             <div className="flex gap-2 mb-3 md:hidden px-3 items-center">
