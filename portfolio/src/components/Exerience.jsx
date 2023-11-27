@@ -47,16 +47,16 @@ function Exerience() {
     },
   ]
   return (
-    <div name="experience" className='min-h-screen bg-gradient-to-b from-[#7366e6] via-gray-500 to-[#7366e6]'>
-      <div className='max-w-screen-lg mx-auto mb-3 px-3'>
-        <h1 className='text-5xl font-bold underline underline-offset-3 text-slate-100 mb-4 max-md:text-2xl'>Experience</h1>
+    <div name="experience" className='min-h-screen  py-8'>
+      <div className='max-w-screen-lg mx-auto mb-3 mt-16 px-3'>
+        <h1 className='text-5xl font-bold underline underline-offset-3 text-slate-100 mb-4 max-md:text-3xl'>Experience</h1>
         <p className='text-lg text-slate-100'>These are the technologies I've worked with</p>
       </div>
-      <div className='flex flex-wrap max-w-screen-lg mx-auto gap-5'>
+      <div className='flex flex-wrap max-w-screen-lg mx-auto gap-5 '>
         {exp.map((item,index)=>{
           return(
-          <div className={`${item.shadow} shadow-xl w-[310px] rounded-lg bg-gray-800 py-3 mx-auto`}>
-          <img src={item.src} alt='experience-profil' className='w-[100px] mx-auto'></img>
+          <div className={`${item.shadow} shadow-xl w-[310px] max-md:w-[250px] rounded-lg bg-gray-800 py-3 mx-auto`}>
+          <img src={item.src} alt='experience-profil' className='w-[100px] mx-auto max-md:w-[80px]'></img>
           <p className='text-lg text-center mt-5 text-slate-100'>{item.name}</p>
           </div>
           )

@@ -40,9 +40,9 @@ function Portfolio() {
     },
   ];
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-[#7366e6] via-gray-500 to-[#7366e6] gap-3 py-5 ">
-      <div className="max-w-screen-lg w-full ">
-        <h1 className="text-5xl font-bold underline underline-offset-2 text-slate-100 mb-5">
+    <div name="portfolio" className="min-h-screen flex flex-col items-center  gap-3  ">
+      <div className="max-w-screen-lg w-full mt-20 p-2  ">
+        <h1 className="text-5xl font-bold underline underline-offset-2 text-slate-100 mb-5 max-md:text-3xl">
           Portfolio
         </h1>
         <p className="text-lg text-slate-100">Checkout some of my work right here</p>
@@ -51,8 +51,8 @@ function Portfolio() {
       <div className="flex flex-wrap gap-3 justify-center max-w-screen-lg">
         {projects.map((item)=>{
           return(
-            <div className="flex flex-col w-[500px] gap-1 rounded-md h-[400px] shadow-lg shadow-slate-600 p-2 max-md:w-[300px] max-md:h-[300px]">
-              <img src={item.src} atl="project-profile" className="rounded-md object-fill w-full h-[250px] hover:scale-105 duration-200 max-md:w-full max-md:h-[100px]"></img>
+            <div className="flex flex-col w-[300px] gap-1 rounded-md h-[400px] shadow-lg shadow-slate-400 p-2 max-md:w-[300px] max-md:h-[300px]">
+              <img src={item.src} atl="project-profile" className="rounded-md object-fill w-full h-[200px] hover:scale-105 duration-200 max-md:w-full max-md:h-[100px]"></img>
               <h1 className="text-center text-3xl font-semibold">{item.name}</h1>
               <p className="text-sm text-center line-clamp-3">{item.description}</p>
               <div className="flex justify-center px-5 gap-4 mt-4">
