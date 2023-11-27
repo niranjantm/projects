@@ -30,6 +30,9 @@ const tripSchema = new mongoose.Schema(
     SeatBooked: {
       type: Array,
     },
+    seats:{
+      type:Array
+    },
     bus_on: {
       type: String,
     },
