@@ -45,7 +45,7 @@ function Booking() {
 
         <div className=" ">
           <p className="text-lg text-center underline underline-offset-2 ">
-            Animeties
+          Amenities
           </p>
           <div className="bg-gray-100 flex flex-wrap gap-2 p-3 rounded-lg">
             {bus.animeties.map((item, index) => {
@@ -67,6 +67,7 @@ function Booking() {
                     return (
                       <button
                         key={index}
+                        
                         className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize`}
                         onClick={() => {
                           seats.splice(index, 1, {
