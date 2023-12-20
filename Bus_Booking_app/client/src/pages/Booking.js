@@ -67,8 +67,8 @@ function Booking() {
                     return (
                       <button
                         key={index}
-                        
-                        className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize`}
+                        disabled={item.user?true:false}
+                        className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize ${item[Object.keys(item)]?'bg-red-500':'bg-transparent'}`}
                         onClick={() => {
                           seats.splice(index, 1, {
                             [Object.keys(item)]: !item[Object.keys(item)],
@@ -91,8 +91,16 @@ function Booking() {
                   if (index < 12 && index > 5) {
                     return (
                       <button
-                        className="border w-[40px] h-[40px] p-1 rounded-lg capitalize"
-                        onClick={() => console.log(bus.seats[index])}
+                      disabled={item.user?true:false}
+                      className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize ${item[Object.keys(item)]?'bg-red-500':'bg-transparent'}`}
+                      onClick={() => {
+                        seats.splice(index, 1, {
+                          [Object.keys(item)]: !item[Object.keys(item)],
+                          
+                        });
+                        setBookSeats([...seats]);
+                        
+                      }}
                       >
                         {Object.keys(item)}
                       </button>
@@ -107,8 +115,16 @@ function Booking() {
                   if (index >= 12 && index < 19) {
                     return (
                       <button
-                        className="border w-[40px] h-[40px] p-1 rounded-lg capitalize"
-                        onClick={() => console.log(bus.seats[index])}
+                      disabled={item.user?true:false}
+                      className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize ${item[Object.keys(item)]?'bg-red-500':'bg-transparent'}`}
+                      onClick={() => {
+                        seats.splice(index, 1, {
+                          [Object.keys(item)]: !item[Object.keys(item)],
+                          
+                        });
+                        setBookSeats([...seats]);
+                        
+                      }}
                       >
                         {Object.keys(item)}
                       </button>
@@ -128,8 +144,16 @@ function Booking() {
                   if (index >= 19 && index < 25) {
                     return (
                       <button
-                        className="border w-[40px] h-[40px] p-1 rounded-lg capitalize"
-                        onClick={() => console.log(bus.seats[index])}
+                      disabled={item.user?true:false}
+                      className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize ${item[Object.keys(item)]?'bg-red-500':'bg-transparent'}`}
+                      onClick={() => {
+                        seats.splice(index, 1, {
+                          [Object.keys(item)]: !item[Object.keys(item)],
+                          
+                        });
+                        setBookSeats([...seats]);
+                        
+                      }}
                       >
                         {Object.keys(item)}
                       </button>
@@ -144,8 +168,16 @@ function Booking() {
                   if (index >= 25 && index < 31) {
                     return (
                       <button
-                        className="border w-[40px] h-[40px] p-1 rounded-lg capitalize"
-                        onClick={() => console.log(bus.seats[index])}
+                      disabled={item.user?true:false}
+                      className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize ${Object.keys(bookSeats[index])?'bg-red-500':'bg-transparent'}`}
+                      onClick={() => {
+                        seats.splice(index, 1, {
+                          [Object.keys(item)]: !item[Object.keys(item)],
+                          
+                        });
+                        setBookSeats([...seats]);
+                        
+                      }}
                       >
                         {Object.keys(item)}
                       </button>
@@ -160,8 +192,16 @@ function Booking() {
                   if (index >= 31) {
                     return (
                       <button
-                        className="border w-[40px] h-[40px] p-1 rounded-lg capitalize"
-                        onClick={() => console.log(bus.seats[index])}
+                      disabled={item.user?true:false}
+                      className={`border w-[40px] h-[40px] p-1 rounded-lg capitalize ${item[Object.keys(item)]?'bg-red-500':'bg-transparent'}`}
+                      onClick={() => {
+                        seats.splice(index, 1, {
+                          [Object.keys(item)]: !item[Object.keys(item)],
+                          
+                        });
+                        setBookSeats([...seats]);
+                        
+                      }}
                       >
                         {Object.keys(item)}
                       </button>
