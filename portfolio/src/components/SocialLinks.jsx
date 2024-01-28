@@ -25,7 +25,7 @@ function SocialLinks() {
                 Github <FaGithub size={30}></FaGithub>
                 </>
             ),
-            href:"https://github.com/niranjantm/projects",
+            href:"https://github.com/niranjantm",
             
 
 
@@ -46,7 +46,7 @@ function SocialLinks() {
                 Resume <BsFillPersonLinesFill size={30}></BsFillPersonLinesFill>
                 </>
             ),
-            href:"https://drive.google.com/file/d/1eZy8FuHxva6LKUCA0d2Qj1h1fUnFa86V/view?usp=drive_link",
+            href:"https://drive.google.com/file/d/1c8_0KThxb4FOLCIhRhvt8VtkvF5DKGjA/view?usp=sharing",
             style:"rounded-br-md"
         }
     ]
