@@ -9,7 +9,7 @@ function Portfolio() {
       description:
         "A full stack web application which uses ReactJS and Tailwind for the frontend and ExpressJS and MongoDB for the backend (MERN-stack).Users can create their account and list their properties for sale or rent",
       deploy: "https://property-com.onrender.com",
-      git: "https://github.com/niranjantm/projects/tree/main/Real-Estate-app",
+      git: "https://github.com/niranjantm/Full-Stack-Project--Property.Com-",
     },
     {
       id: 2,
@@ -36,7 +36,7 @@ function Portfolio() {
       description:
         "A web application which ReactJS and Tailwind for the frontend and ExpressJS and MongoDB for the backend (MERN-stack).Users can create booking for the shows they want with ease",
       deploy: "",
-      git: "https://github.com/niranjantm/BookingAPI",
+      git: "https://github.com/niranjantm/BookMyShow-Backend-",
     },
   ];
   return (
