@@ -21,7 +21,7 @@ function About() {
             the MERN stack MongoDB, Express JS, React, and Node JS. 
         </p>
           <p className="text-lg mb-1 text-slate-100 max-md:text-sm">
-            During an enriching 8-month internship, I immersed myself in an in-depth
+            During an enriching 8-month internship with AlmaBetter, I immersed myself in an in-depth
             exploration of MERN stack technologies, gaining valuable insights
             and hands-on experience. I successfully developed impactful projects
             that showcase my proficiency in creating robust applications within
