@@ -52,7 +52,7 @@ function Home() {
         
         <div className=" text-white flex flex-col justify-center h-full ">
           <h2 className="text-4xl sm:text-7xl font-bold">I'm a Full Stack Developer</h2>
-          <p className="text-gray-200 py-4  max-w-md text-lg">
+          <p className="text-gray-200 py-4  max-w-md text-lg max-md:text-sm">
             As a dedicated MERN Full Stack Developer, I specialize in leveraging
             the MERN stack to create dynamic and user-friendly web applications.
             Proficient in React JS, MongoDB, Express JS, Node JS, HTML/CSS,
