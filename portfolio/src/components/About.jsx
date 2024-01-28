@@ -14,17 +14,21 @@ function About() {
       </div>
       <div className=" p-4 max-w-screen-lg w-full flex justify-between gap-10 max-md:flex-col mt-5 max-md:mt-2 ">
         <div className="w-full">
-        <p className="text-lg mb-2 text-slate-100 max-md:text-sm">
+        <p className="text-lg mb-1 text-slate-100 max-md:text-sm">
           Hello, I'm Niranjan T M, a devoted MERN Full Stack Developer.
             Proficient in React, HTML/CSS, Tailwind CSS, JavaScript, PostgreSQL
             and MongoDB. my focus is on creating seamless user experiences using
-            the MERN stack — MongoDB, Express JS, React, and Node JS. 
+            the MERN stack MongoDB, Express JS, React, and Node JS. 
+        </p>
+          <p className="text-lg mb-1 text-slate-100 max-md:text-sm">
             During an enriching 8-month internship, I immersed myself in an in-depth
             exploration of MERN stack technologies, gaining valuable insights
             and hands-on experience. I successfully developed impactful projects
             that showcase my proficiency in creating robust applications within
             the MERN stack. Eager to apply this knowledge and contribute to
             innovative solutions in future endeavors.
+          </p>
+          <p className="text-lg mb-2 text-slate-100 max-md:text-sm">
             Thank you for visiting my portfolio, and I'm excited to collaborate with like-minded
             professionals who share a passion for technology and innovation.
         </p>
